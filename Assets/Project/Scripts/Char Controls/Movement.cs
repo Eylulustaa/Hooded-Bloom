@@ -38,7 +38,7 @@ public class Movement : MonoBehaviour
     {
         
         
-          // BELKÝ DÖNERÝZ !!!  animator.SetBool("isJumping", !isGrounded);
+          // BELKï¿½ Dï¿½NERï¿½Z !!!  animator.SetBool("isJumping", !isGrounded);
 
             isGrounded = Physics2D.OverlapCircle(transform.position, 1, groundLayer);
 
@@ -47,20 +47,17 @@ public class Movement : MonoBehaviour
 
             rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
 
-
-
-            if (moveInput > 0)
-            {
-                //spriteRenderer.flipX = false;
+            if (moveInput > 0.1f)
+             {
                 transform.rotation = Quaternion.Euler(0, 0, 0);
-            }
-            else if (moveInput < 0)
+             } 
+            else if (moveInput < -0.1f)
             {
                 //spriteRenderer.flipX = true;
                 transform.rotation = Quaternion.Euler(0, 180, 0);
             }
 
-           // BELKÝ SONRA KULLANIRIZ !!!   animator.SetBool("isWalking", moveInput != 0);
+             animator.SetBool("isWalking", moveInput !=0);
 
             // If the character is grounded and the jump button is pressed, add a force upwards to the Rigidbody
             if (isGrounded && Input.GetKeyDown(KeyCode.Space))
