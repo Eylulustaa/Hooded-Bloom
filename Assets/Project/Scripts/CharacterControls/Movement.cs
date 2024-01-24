@@ -36,34 +36,36 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
-        
-        
-          // BELK� D�NER�Z !!!  animator.SetBool("isJumping", !isGrounded);
+         // BELK� D�NER�Z !!!  animator.SetBool("isJumping", !isGrounded);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1, groundLayer);     
+        isGrounded = hit.collider != null && hit.collider.CompareTag("Ground");
 
-            isGrounded = Physics2D.OverlapCircle(transform.position, 1, groundLayer);
-
-            float moveInput = Input.GetAxisRaw("Horizontal");
+        float moveInput = Input.GetAxisRaw("Horizontal");
 
 
-            rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
+        rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
 
-            if (moveInput > 0.1f)
-             {
-                transform.rotation = Quaternion.Euler(0, 0, 0);
-             } 
-            else if (moveInput < -0.1f)
-            {
-                //spriteRenderer.flipX = true;
-                transform.rotation = Quaternion.Euler(0, 180, 0);
-            }
+        if (moveInput > 0.1f)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        } 
+        else if (moveInput < -0.1f)
+        {
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
 
              animator.SetBool("isWalking", moveInput !=0);
 
-            // If the character is grounded and the jump button is pressed, add a force upwards to the Rigidbody
-            if (isGrounded && Input.GetKeyDown(KeyCode.Space))
-            {
-                rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            }
+        if (isGrounded)
+        {
+            Vector2 moveDirection = new Vector2(moveInput * speed, rb.velocity.y);
+            rb.velocity = moveDirection;
+        }
+
+        if (isGrounded && Input.GetKeyDown(KeyCode.Space))
+        {
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        }
 
         
 

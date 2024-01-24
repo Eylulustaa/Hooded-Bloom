@@ -9,6 +9,7 @@ public class ButtonController : MonoBehaviour
     public TextMesh countdownText; // 3D TextMesh objesi
 
     private bool isPlayerOnButton = false; // Karakter butonun üzerinde mi kontrol etmek için
+    private bool boxIn = false;
 
     private void Start()
     {
@@ -23,18 +24,41 @@ public class ButtonController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            if(!boxIn)
+            {
+                isPlayerOnButton = true;
+                StartCoroutine(TogglePlatformsAfterDelay(true, delayBeforeVisible)); 
+            }
+        }
+
+        if (other.CompareTag("Box"))
+        {
             isPlayerOnButton = true; // Karakter butonun üzerine geldiðinde iþaretle
             StartCoroutine(TogglePlatformsAfterDelay(true, delayBeforeVisible)); // Belirtilen süre sonra platformlarý görünür yap
+            boxIn = true;
         }
+
     }
+
 
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
+            if(!boxIn)
+            {
+                isPlayerOnButton = false; // Karakter butondan ayrýldýðýnda iþaretle
+                StartCoroutine(TogglePlatformsAfterDelay(false, delayBeforeInvisible)); // Belirtilen süre sonra platformlarý tekrar yarý görünür yap
+            }
+        }
+
+        if (other.CompareTag("Box"))
+        {
             isPlayerOnButton = false; // Karakter butondan ayrýldýðýnda iþaretle
             StartCoroutine(TogglePlatformsAfterDelay(false, delayBeforeInvisible)); // Belirtilen süre sonra platformlarý tekrar yarý görünür yap
+            boxIn = false;
         }
+
     }
 
     private System.Collections.IEnumerator TogglePlatformsAfterDelay(bool visible, float delay)
