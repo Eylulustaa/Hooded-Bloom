@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4723021409920331289}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.658, y: 1.756, z: 0}
+  m_LocalPosition: {x: 0.067, y: 1.329, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -53,7 +53,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: 2337c2eb6a0ff434ba3c83272e793dea, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -87,13 +87,13 @@ TextMesh:
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
-  m_Anchor: 0
-  m_Alignment: 0
+  m_Anchor: 4
+  m_Alignment: 1
   m_TabSize: 4
   m_FontSize: 0
   m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Font: {fileID: 12800000, guid: 2337c2eb6a0ff434ba3c83272e793dea, type: 3}
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
@@ -125,7 +125,7 @@ Transform:
   m_GameObject: {fileID: 4871649753221592930}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.9864, y: -1.3252, z: 0}
-  m_LocalScale: {x: 0.4528, y: 0.3896, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1279831159554287522}
@@ -247,3 +247,5 @@ MonoBehaviour:
   delayBeforeInvisible: 3
   delayBeforeVisible: 0
   countdownText: {fileID: 1031351282881799768}
+  normalSprite: {fileID: 0}
+  interactedSprite: {fileID: 0}

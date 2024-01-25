@@ -14,8 +14,15 @@ public class ButtonInteraction : MonoBehaviour
     private float startTime;
     private float journeyLength;
 
+    public Sprite normalSprite;
+    public Sprite interactedSprite; 
+    private SpriteRenderer spriteRenderer;
+    public GameObject E;
+
     void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
         originalPositions = new Vector3[platforms.Length];
         for (int i = 0; i < platforms.Length; i++)
         {
@@ -35,6 +42,7 @@ public class ButtonInteraction : MonoBehaviour
     {
         if (col.CompareTag("Player"))
         {
+            E.SetActive(true);
             CharOnButton = true;
         }
     }
@@ -43,6 +51,7 @@ public class ButtonInteraction : MonoBehaviour
     {
         if (col.CompareTag("Player"))
         {
+            E.SetActive(false);
             CharOnButton = false;
         }
     }
@@ -57,10 +66,12 @@ public class ButtonInteraction : MonoBehaviour
 
             if (!platformsMoved)
             {
+                spriteRenderer.sprite = interactedSprite;
                 MovePlatforms(targetPositions);
             }
             else
             {
+                spriteRenderer.sprite = normalSprite;
                 MovePlatforms(originalPositions);
             }
 
