@@ -21,7 +21,8 @@ public class Movement : MonoBehaviour
     [HideInInspector]
     public SpriteRenderer spriteRenderer;
 
-
+    public AudioClip jumpSound;
+    private AudioSource audioSource;
 
 
     void Start()
@@ -30,13 +31,14 @@ public class Movement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         animator = GetComponentInChildren<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
 
 
     void Update()
     {
-         // BELK� D�NER�Z !!!  animator.SetBool("isJumping", !isGrounded);
+        animator.SetBool("isJumping", !isGrounded);
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1, groundLayer);     
         isGrounded = hit.collider != null && hit.collider.CompareTag("Ground");
 
@@ -64,8 +66,14 @@ public class Movement : MonoBehaviour
 
         if (isGrounded && Input.GetKeyDown(KeyCode.Space))
         {
+            PlaySound(jumpSound);
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
 
+    }
+
+    private void PlaySound(AudioClip soundClip)
+    {
+        audioSource.PlayOneShot(soundClip);
     }
 }

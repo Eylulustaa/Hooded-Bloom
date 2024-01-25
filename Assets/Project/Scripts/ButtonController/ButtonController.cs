@@ -15,9 +15,13 @@ public class ButtonController : MonoBehaviour
     public Sprite interactedSprite;
     private SpriteRenderer spriteRenderer;
 
+    public AudioClip buttonSound;
+    private AudioSource audioSource;
+
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
 
         if (countdownText != null)
         {
@@ -32,6 +36,7 @@ public class ButtonController : MonoBehaviour
             if(!boxIn)
             {
                 spriteRenderer.sprite = interactedSprite;
+                PlaySound(buttonSound);
                 isPlayerOnButton = true;
                 StartCoroutine(TogglePlatformsAfterDelay(true, delayBeforeVisible)); 
             }
@@ -40,6 +45,7 @@ public class ButtonController : MonoBehaviour
         if (other.CompareTag("Box"))
         {
             spriteRenderer.sprite = interactedSprite;
+            PlaySound(buttonSound);
             isPlayerOnButton = true;
             StartCoroutine(TogglePlatformsAfterDelay(true, delayBeforeVisible));
             boxIn = true;
@@ -54,17 +60,19 @@ public class ButtonController : MonoBehaviour
         {
             if(!boxIn)
             {
-                spriteRenderer.sprite = normalSprite;
                 isPlayerOnButton = false; 
-                StartCoroutine(TogglePlatformsAfterDelay(false, delayBeforeInvisible)); 
+                StartCoroutine(TogglePlatformsAfterDelay(false, delayBeforeInvisible));
+                spriteRenderer.sprite = normalSprite;
+                PlaySound(buttonSound);
             }
         }
 
         if (other.CompareTag("Box"))
         {
-            spriteRenderer.sprite = normalSprite;
             isPlayerOnButton = false; 
-            StartCoroutine(TogglePlatformsAfterDelay(false, delayBeforeInvisible)); 
+            StartCoroutine(TogglePlatformsAfterDelay(false, delayBeforeInvisible));
+            spriteRenderer.sprite = normalSprite;
+            PlaySound(buttonSound);
             boxIn = false;
         }
 
@@ -83,9 +91,8 @@ public class ButtonController : MonoBehaviour
                 countdown -= 0.1f;
             }
 
-            countdownText.text = "3.0"; 
+            countdownText.text = "3.0";
         }
-
         TogglePlatformsVisibility(visible); 
     }
 
@@ -95,5 +102,10 @@ public class ButtonController : MonoBehaviour
         {
             platform.SetActive(visible); 
         }
+    }
+
+    private void PlaySound(AudioClip soundClip)
+    {
+       audioSource.PlayOneShot(soundClip);
     }
 }

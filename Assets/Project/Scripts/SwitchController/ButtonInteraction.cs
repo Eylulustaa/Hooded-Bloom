@@ -19,8 +19,12 @@ public class ButtonInteraction : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     public GameObject E;
 
+    public AudioClip switcherSound;
+    private AudioSource audioSource;
+
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         originalPositions = new Vector3[platforms.Length];
@@ -66,11 +70,13 @@ public class ButtonInteraction : MonoBehaviour
 
             if (!platformsMoved)
             {
+                PlaySound(switcherSound);
                 spriteRenderer.sprite = interactedSprite;
                 MovePlatforms(targetPositions);
             }
             else
             {
+                PlaySound(switcherSound);
                 spriteRenderer.sprite = normalSprite;
                 MovePlatforms(originalPositions);
             }
@@ -107,5 +113,10 @@ public class ButtonInteraction : MonoBehaviour
 
         isInteracting = false; // Etkileþim tamamlandý, bir sonraki etkileþim için izin ver
         platformover = false;
+    }
+
+    private void PlaySound(AudioClip soundClip)
+    {
+        audioSource.PlayOneShot(soundClip);
     }
 }
