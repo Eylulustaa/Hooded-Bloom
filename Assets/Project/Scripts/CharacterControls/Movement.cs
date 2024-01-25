@@ -55,7 +55,7 @@ public class Movement : MonoBehaviour
         }
 
              animator.SetBool("isWalking", moveInput !=0);
-
+         
         if (isGrounded)
         {
             Vector2 moveDirection = new Vector2(moveInput * speed, rb.velocity.y);
@@ -66,8 +66,6 @@ public class Movement : MonoBehaviour
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
-
-        
 
     }
 }
