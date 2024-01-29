@@ -10,7 +10,7 @@ public class LevelManager : MonoBehaviour
     private int collectedItems = 0;
 
     public TextMeshProUGUI collectedText;
-    public GameObject exitDoor;
+    [SerializeField] GameObject exitDoor, pointer;
 
     private void Awake()
     {
@@ -42,5 +42,6 @@ public class LevelManager : MonoBehaviour
     {
         if (exitDoor != null)
             exitDoor.SetActive(true);
+            pointer.SetActive(true);
     }
 }

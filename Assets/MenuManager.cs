@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 public class MenuManager : MonoBehaviour
 {
     [SerializeField]
-    GameObject LevelPanel;
-    GameObject GuidePanel;
+    GameObject LevelPanel, GuidePanel;
+    
     public void Begin()
     {
         SceneManager.LoadScene("Level_1");

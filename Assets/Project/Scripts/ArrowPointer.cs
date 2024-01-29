@@ -20,7 +20,7 @@ public class ArrowPointer : MonoBehaviour
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
             // Update the arrow's position to be above the player
-            transform.position = new Vector3(player.position.x, player.position.y + 1f, player.position.z);
+            transform.position = new Vector3(player.position.x, player.position.y + 0.7f, player.position.z);
         }
     }
 }
